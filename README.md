@@ -1,0 +1,1 @@
+Back-end de comunicação entre o STM32F429 e o front-end do PC
