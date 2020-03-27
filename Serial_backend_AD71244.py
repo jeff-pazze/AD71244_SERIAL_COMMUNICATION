@@ -1,91 +1,109 @@
 import serial
 import time
 
-ser = serial.Serial('COM4', 9600, timeout=1)
+ 
+"""
+VARIAVEIS GLOBAIS (NESTE EXEMPLO)
+"""
+
+DEVICE    = 'COM4'
+BAUD_RATE =  9600
+TIMEOUT   =  1
+PARITY    = 'N'
+STOPBITS  = '1'
+BYTESIZE  = '8'
+
+'''
+def InfoComSerial():
+    print( '\nObtendo informacoes sobre a comunicacao serial\n')
+    # Iniciando conexao serial
+    #comport = serial.Serial(DEVICE, 9600, timeout=1)
+    comport = serial.Serial(DEVICE, int(BAUD_RATE), timeout=int(TIMEOUT), bytesize=int(BYTESIZE), stopbits=int(STOPBITS), parity=PARITY)
+    # Alem das opcoes rtscts=BOOL, xonxoff=BOOL, e dsrdtr=BOOL
+    # Link: http://pyserial.sourceforge.net/pyserial_api.html#constants
+    time.sleep(1.8) # Entre 1.5s a 2s
+    print ('\nStatus Porta: %s ' % (comport.isOpen()))
+    print ('Device conectado: %s ' % (comport.name))
+    print ('Dump da configuracao:\n %s ' % (comport))
+ 
+    print ('\n###############################################\n')
+ 
+    # Fechando conexao serial
+    #comport.close()
+""" main """
+if __name__ == '__main__':
+    InfoComSerial()
+
+ 
+'''
+'''
+def ComSerial():
+    DEVICE    = 'COM4'
+    BAUD_RATE =  9600
+    TIMEOUT   =  1
+    PARITY    = 'N'
+    STOPBITS  = '1'
+    BYTESIZE  = '8'
+    
+    ser = serial.Serial(DEVICE , BAUD_RATE, timeout= TIMEOUT )
+    # var = input("Enter something: ")
+    # ser.write(str.encode(var))
+    
+    time.sleep(1)
+    var1 = "S"                                      # Variavel que corresponde pela leitura de dados pelo AD
+    ser.write(str.encode(var1))                     # Envia a solicitação para leitura de dados peço AD
+    time.sleep(1)
+    var2 = "C"                                      # Variavel que corresponde pela leitura de dados pelo AD de forma continua
+    ser.write(str.encode(var2)) 
+    
+    return ser
+    
+    
+    
+'''
+'''
+
+def InfoComSerial():
+    print( '\nObtendo informacoes sobre a comunicacao serial\n')
+    # Iniciando conexao serial
+    #comport = serial.Serial(DEVICE, 9600, timeout=1)
+    comport = serial.Serial(DEVICE, int(BAUD_RATE), timeout=int(TIMEOUT), bytesize=int(BYTESIZE), stopbits=int(STOPBITS), parity=PARITY)
+    # Alem das opcoes rtscts=BOOL, xonxoff=BOOL, e dsrdtr=BOOL
+    # Link: http://pyserial.sourceforge.net/pyserial_api.html#constants
+    time.sleep(1.8) # Entre 1.5s a 2s
+    print ('\nStatus Porta: %s ' % (comport.isOpen()))
+    print ('Device conectado: %s ' % (comport.name))
+    print ('Dump da configuracao:\n %s ' % (comport))
+ 
+    print ('\n###############################################\n')
+ 
+'''
+ser = serial.Serial(DEVICE , BAUD_RATE, timeout= TIMEOUT )
 # var = input("Enter something: ")
 # ser.write(str.encode(var))
 
-time.sleep(2)
-'''
+time.sleep(1)
 
-#ser.write(str.encode('A'))
-ser.write("A".encode())
-time.sleep(2)
-#ser.close()
+var1 = "S"                                      # Variavel que corresponde pela leitura de dados pelo AD
+ser.write(str.encode(var1))                     # Envia a solicitação para leitura de dados peço AD
 
-# ser = serial.Serial('COM4', 9600, timeout=0)
-#ser.write(str.encode('S'))
-ser.write("s".encode())
-time.sleep(2)
-# ser.close()
-# time.sleep(1)
+time.sleep(1)
+var2 = "C"                                      # Variavel que corresponde pela leitura de dados pelo AD de forma continua
+ser.write(str.encode(var2)) 
+                    # Envia a solicitação para leitura de dados pelo AD de forma continua
+#InfoComSerial()
 
-# ser = serial.Serial('COM4', 9600, timeout=0)
-
-#ser.write(str.encode("S"))
-ser.write("c".encode())
-time.sleep(2)
-# ser.close()
-# time.sleep(1)
-# ser.write("s")
-# time.sleep(1)
-# ser.write("s")
-'''
-# var = "A"
-# ser.write(str.encode(var))
-
-# time.sleep(2)
-var1 = "S"
-ser.write(str.encode(var1))
-
-time.sleep(2)
-var2 = "C"
-ser.write(str.encode(var2))
-
-
+#ComSerial()
+    
 while 1:
     try:
         print(ser.readline())
-        #print('')
+        #print(ser.read())
+        #print(ser.read(5))
+        print('\n')
         # time.sleep(1)
         # var = input("Enter something: ")
         # ser.write(str.encode(var))
     except ser.SerialTimeoutException:
         print('Data could not be read')
- 
 
-
-# ser = serial.Serial( "COM3", 9600, timeout=0.05)
-# print(ser.name)         # check which port was really used
-# ser.write(b'hello')     # write a string
-# ser.close()             # close port
-
-#python -m serial.tools.list_ports
-
-# import serial
-
-# ser = serial.Serial()
-# ser.port = "COM4"               # serial port
-# ser.baudrate = 9600           # set baudrate 115200
-# ser.timeout = 60                # timeout 60 second
-# ser.open()                      # open serial port
-
-# while True:
-#     ser.write('l')              # send '1' to port to get light
-#     light = ser.read(4) 
-#     print( "light", light)
-
-
-# import time
-# ser = serial.Serial('COM4', 9600, timeout=0)
-
-# while 1:
-#  try:
-#   print( ser.readline())
-#   time.sleep(1)
-#  except ser.SerialTimeoutException:
-#   print('Data could not be read')
-#   time.sleep(1)
-#   ser.close()             # close port
-        
-        
